@@ -71,72 +71,72 @@ function handleMicroData (router: Router) {
 }
 
 // ----------分割线---默认模式------两种模式任选其一-----放开注释即可运行------- //
-// const router = createRouter({
-//   history: createWebHashHistory(),
-//   routes,
-// })
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes,
+})
 
-// const app = createApp(App)
-// app.use(router)
-// app.mount('#vite-app')
+const app = createApp(App)
+app.use(router)
+app.mount('#app1')
 
-// console.log('微应用child-vite渲染了')
+console.log('微应用child-vite渲染了')
 
-// handleMicroData(router)
+handleMicroData(router)
 
-// fixBugForVueRouter4(router)
+fixBugForVueRouter4(router)
 
-// // 监听卸载操作
-// window.addEventListener('unmount', function () {
-//   app.unmount()
-//   // 卸载所有数据监听函数
-//   window.eventCenterForAppNameVite?.clearDataListener()
-//   console.log('微应用child-vite卸载了')
-// })
+// 监听卸载操作
+window.addEventListener('unmount', function () {
+  app.unmount()
+  // 卸载所有数据监听函数
+  window.eventCenterForAppNameVite?.clearDataListener()
+  console.log('微应用child-vite卸载了')
+})
 
 
 
 // ----------分割线---umd模式------两种模式任选其一-------------- //
-let app: AppInstance | null = null
-let router: Router | null = null
-let history: RouterHistory | null = null
-// 将渲染操作放入 mount 函数
-function mount () {
-  history = createWebHashHistory()
-  router = createRouter({
-    history,
-    routes,
-  })
+// let app: AppInstance | null = null
+// let router: Router | null = null
+// let history: RouterHistory | null = null
+// // 将渲染操作放入 mount 函数
+// function mount () {
+//   history = createWebHashHistory()
+//   router = createRouter({
+//     history,
+//     routes,
+//   })
 
-  app = createApp(App)
-  app.use(router)
-  app.mount('#app1')
+//   app = createApp(App)
+//   app.use(router)
+//   app.mount('#app1')
 
-  console.log('微应用child-vite渲染了')
+//   console.log('微应用child-vite渲染了')
 
-  handleMicroData(router)
+//   handleMicroData(router)
 
-  // fixBugForVueRouter4(router)
-}
+//   // fixBugForVueRouter4(router)
+// }
 
-// 将卸载操作放入 unmount 函数
-function unmount () {
-  app?.unmount()
-  history?.destroy()
-  // 卸载所有数据监听函数
-  window.eventCenterForAppNameVite?.clearDataListener()
-  app = null
-  router = null
-  history = null
-  console.log('微应用child-vite卸载了')
-}
+// // 将卸载操作放入 unmount 函数
+// function unmount () {
+//   app?.unmount()
+//   history?.destroy()
+//   // 卸载所有数据监听函数
+//   window.eventCenterForAppNameVite?.clearDataListener()
+//   app = null
+//   router = null
+//   history = null
+//   console.log('微应用child-vite卸载了')
+// }
 
-// 微前端环境下，注册mount和unmount方法
-if (window.__MICRO_APP_BASE_APPLICATION__) {
-  // @ts-ignore
-  window['micro-app-appname-vite'] = { mount, unmount }
-} else {
-  // 非微前端环境直接渲染
-  mount()
-}
+// // 微前端环境下，注册mount和unmount方法
+// if (window.__MICRO_APP_BASE_APPLICATION__) {
+//   // @ts-ignore
+//   window['micro-app-appname-vite'] = { mount, unmount }
+// } else {
+//   // 非微前端环境直接渲染
+//   mount()
+// }
 
